@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chord Detours</title>
+    <style>
+      body {
+        font-size: 18px; /* Adjust body text size */
+      }
+      select {
+        font-size: 18px; /* Increase font size in dropdowns */
+        padding: 5px 10px; /* Add some padding inside dropdowns */
+        width: 250px; /* Set a specific width for dropdowns */
+        margin-bottom: 10px; /* Add some space below dropdowns */
+      }
+    </style>
+    <script>
+      // Data structure to hold the chord detours information
+      const chordDetours = {
+        I: {
+          1: "1 - b3maj (90’s or 70s rock move)",
+          "1 - 4": "1 - 3maj - 4 (make it soulful)",
+          "1 - 6": "1 - 3maj - 6 (make it soulful / classical)",
+          "1 - 5 - 1": "1 - 5/7 - 6 - 6/5 - 4 - 5/5 - 1",
+          "1 - 2": "1 - 2maj (shift to lydian)",
+        },
+        ii: {
+          "2 (mi)":
+            "2mi - 4 mi or 2mi - 2⊘ (sad to sadder - friends in low places)",
+        },
+        IV: {
+          4: "4 mi (beatles) or 1sus2/b6 (sk8r boi)",
+          "4 - 1": "b6 - b7 - 1 (hero cadence epic)",
+          "4 - 5":
+            "2 - 3 - 4 - 5 (longer) or 4mi - 5mi - b6 - b7 (parallel minor to the hero cadence) or 4 - 5 (in a different key to establish a new key)",
+        },
+        V: {
+          "5 - 1":
+            "ii V - I or 3-6-2-5-1 or b6 - 5mi - 4mi - 2⊘ - 1 (moana ending / speechless) or b7 - 4 - 1 (folk/70’s southern turnaround) or b7 - 5 - 1 (disney turnaround)",
+        },
+        vi: {
+          6: "6 - 2 major (hall/oates, madonna, quick shift to dorian)",
+          "6 - 2": "6maj - 2 (strong leading jazz to ii)",
+        },
+      };
+
+      // Function to populate the second dropdown based on the first dropdown's selection
+      function populateSecondaryDropdown(primarySelection) {
+        const secondaryDropdown = document.getElementById(
+          "secondaryChordDropdown"
+        );
+        secondaryDropdown.innerHTML = ""; // Clear existing options
+
+        // Add a default option to the secondary dropdown
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.text = "Select a specific chord progression to alter";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        secondaryDropdown.appendChild(defaultOption);
+
+        const options = chordDetours[primarySelection];
+        for (const key in options) {
+          const option = document.createElement("option");
+          option.value = key;
+          option.text = key;
+          secondaryDropdown.appendChild(option);
+        }
+      }
+
+      // Function to display chord detours with line breaks for multiple answers
+      function displayChordDetours() {
+        const primarySelection = document.getElementById(
+          "primaryChordDropdown"
+        ).value;
+        const secondarySelection = document.getElementById(
+          "secondaryChordDropdown"
+        ).value;
+
+        const detours = chordDetours[primarySelection][secondarySelection];
+        const detoursWithBreaks = detours.replace(/ or /g, "<br>"); // Replace 'or' with line breaks
+        document.getElementById("detourDisplay").innerHTML = detoursWithBreaks;
+      }
+
+      // Initialize the secondary dropdown on page load
+      window.onload = function () {
+        populateSecondaryDropdown(
+          document.getElementById("primaryChordDropdown").value
+        );
+      };
+    </script>
+  </head>
+  <body>
+    <h1>Chord Detours</h1>
+    <label for="primaryChordDropdown">Select a Chord:</label>
+    <select
+      id="primaryChordDropdown"
+      onchange="populateSecondaryDropdown(this.value)"
+    >
+      <option value="I">I</option>
+      <option value="ii">ii</option>
+      <option value="IV">IV</option>
+      <option value="V">V</option>
+      <option value="vi">vi</option>
+    </select>
+    <br />
+    <label for="secondaryChordDropdown">Select a Variation:</label>
+    <select id="secondaryChordDropdown" onchange="displayChordDetours()">
+      <!-- Default option will be added dynamically -->
+    </select>
+    <br />
+    <h2>Chord Detours:</h2>
+    <div id="detourDisplay"></div>
+  </body>
+</html>
