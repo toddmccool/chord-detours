@@ -16,11 +16,11 @@
       }
       @media screen and (max-width: 600px) {
         body {
-          font-size: 36px; /* Increase font size for mobile */
+          font-size: 27px; /* Mid-size font for mobile */
         }
         select {
-          font-size: 36px; /* Increase dropdown font size for mobile */
-          padding: 10px 20px; /* Increase padding for better touch interaction */
+          font-size: 27px; /* Mid-size font in dropdowns for mobile */
+          padding: 7.5px 15px; /* Adjust padding for better touch interaction */
           width: 100%; /* Make dropdowns full-width */
         }
       }
@@ -103,7 +103,9 @@
   </head>
   <body>
     <h1>Chord Detours</h1>
-    <label for="primaryChordDropdown">Select a Chord:</label>
+    <label for="primaryChordDropdown"
+      >Select the Chord you'd like to replace:</label
+    >
     <select
       id="primaryChordDropdown"
       onchange="populateSecondaryDropdown(this.value)"
@@ -115,7 +117,9 @@
       <option value="vi">vi</option>
     </select>
     <br />
-    <label for="secondaryChordDropdown">Select a Variation:</label>
+    <label for="secondaryChordDropdown"
+      >Select the specific motif/cadence/progression you want to replace:</label
+    >
     <select id="secondaryChordDropdown" onchange="displayChordDetours()">
       <!-- Default option will be added dynamically -->
     </select>
