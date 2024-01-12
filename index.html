@@ -12,6 +12,16 @@
         width: 250px; /* Set a specific width for dropdowns */
         margin-bottom: 10px; /* Add some space below dropdowns */
       }
+      @media screen and (max-width: 600px) {
+        body {
+          font-size: 36px; /* Increase font size for mobile */
+        }
+        select {
+          font-size: 36px; /* Increase dropdown font size for mobile */
+          padding: 10px 20px; /* Increase padding for better touch interaction */
+          width: 100%; /* Make dropdowns full-width */
+        }
+      }
     </style>
     <script>
       // Data structure to hold the chord detours information
